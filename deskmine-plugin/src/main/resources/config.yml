@@ -1,0 +1,60 @@
+# Root of the navigable filesystem scope. Empty = "/" (the whole drive), so
+# navigation never dead-ends: the home room's back door leads on to /Users,
+# Macintosh HD, and beyond. Set a path here to fence the world in.
+root: ""
+
+# Directory used as spawn (the mansion's entrance hall). Empty = ~/Desktop if present, else home.
+spawn-dir: ""
+
+world:
+  # World name. Uses normal Minecraft terrain; a fresh name = fresh terrain.
+  name: deskmine-hills
+  # Spawn hostile mobs (rooms are lit and sealed; the dock hides behind a lever).
+  mobs: true
+
+mansion:
+  # Interior size of each mansion room (odd number >= 17).
+  room-size: 21
+  # How far below the mansion's ground floor the first underground rooms sit.
+  cellar-drop: 14
+
+room:
+  # Maximum interior size of underground rooms (odd number >= 17).
+  size: 33
+  # Minimum room size; underground rooms scale between min-size and size based on contents.
+  min-size: 17
+  # Gap between underground rooms on the grid.
+  spacing: 15
+  # Max individual file frames rendered per room (spec 5.3 overflow cap).
+  file-cap: 120
+  # How many blocks lower each directory level sits underground.
+  depth-step: 6
+
+hidden:
+  # When true, hidden (dot) files and folders are omitted from rooms.
+  # Toggled in-game by the lever in the spawn room; the setting persists here.
+  hide: false
+
+menubar:
+  # Render the frontmost app's menu bar as chests on the obsidian strip.
+  # Clicking an item in a chest performs that menu action for real.
+  # Needs Accessibility permission for the process running the server.
+  enabled: true
+  # How often to check which app is frontmost.
+  poll-seconds: 2
+  # Re-read the menus of an unchanged app after this long.
+  refetch-seconds: 30
+  # When true, the chests mirror Finder instead of the frontmost app
+  # (while you play, the frontmost app is always the game itself).
+  # Toggled in-game by the lever in the spawn room; persists here.
+  finder-menus: false
+
+dock:
+  # Render the macOS Dock as pressure-plate launchers (reads pinned apps; launches via 'open').
+  enabled: true
+  # How often to re-read the Dock for changes.
+  refresh-seconds: 60
+
+watch:
+  # Seconds a room with no players inside stays watched before its watcher detaches (spec 4.4).
+  unload-after-seconds: 60

@@ -1,0 +1,11 @@
+name: Deskmine
+version: '${version}'
+main: dev.deskmine.DeskminePlugin
+api-version: '1.21'
+description: A live Minecraft world that models your macOS filesystem (read-only MVP).
+author: Deskmine contributors
+commands:
+  deskmine:
+    description: Deskmine navigation
+    usage: /deskmine <spawn|goto <path>|up|whereami|refresh>
+    aliases: [dm]

@@ -1,0 +1,25 @@
+# Local Minecraft server runtime and generated world state.
+server/
+
+# Build outputs and caches.
+deskmine-plugin/build/
+deskmine-plugin/.gradle/
+build/
+.gradle/
+*.class
+*.jar
+
+# Logs and crash reports.
+*.log
+*.log.gz
+hs_err_pid*
+
+# Local machine/editor state.
+.DS_Store
+.idea/
+.vscode/
+
+# Local assistant/workspace metadata.
+AGENTS.md
+.agents/
+.codex/

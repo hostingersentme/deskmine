@@ -14,7 +14,14 @@ PLUGIN_PROJECT="$DIR/deskmine-plugin"
 
 # --- Java 25+ check ----------------------------------------------------------
 JAVA_BIN=""
-for candidate in java /opt/homebrew/opt/openjdk/bin/java /usr/local/opt/openjdk/bin/java; do
+JAVA_HOME_CANDIDATE="$(/usr/libexec/java_home -v 25 2>/dev/null || true)"
+for candidate in \
+  "${JAVA_HOME_CANDIDATE}/bin/java" \
+  java \
+  /opt/homebrew/opt/openjdk/bin/java \
+  /usr/local/opt/openjdk/bin/java
+do
+  [ "$candidate" != "/bin/java" ] || continue
   if "$candidate" -version 2>&1 | head -1 | grep -Eq '"(2[5-9]|[3-9][0-9])'; then
     JAVA_BIN="$(command -v "$candidate" 2>/dev/null || printf '%s' "$candidate")"
     break
@@ -22,7 +29,7 @@ for candidate in java /opt/homebrew/opt/openjdk/bin/java /usr/local/opt/openjdk/
 done
 if [ -z "$JAVA_BIN" ]; then
   echo "Paper $PAPER_VERSION requires Java 25+."
-  echo "Install it with:  brew install openjdk   (or:  brew install --cask temurin)"
+  echo "Install a Java 25+ JDK package, then try again."
   exit 1
 fi
 echo "Using Java: $JAVA_BIN"

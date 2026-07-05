@@ -29,7 +29,9 @@ You need:
 - Gradle, which builds the Deskmine plugin.
 - Git, which downloads the Deskmine source from GitHub.
 
-The good news: Homebrew can install Git, Java, and Gradle with one command.
+The good news: on recent macOS versions, Homebrew can install Git, Java, and Gradle with one command.
+
+Older macOS warning: Homebrew may say it needs a full Xcode installation to install Java. That usually means Homebrew cannot use a ready-made Java download for your macOS version and wants to build Java itself. That is not beginner-friendly, and full Xcode may not be available for old macOS versions. If that happens, do not try to build Java with Xcode. Use the older-Mac Java notes in Step 3.
 
 ## Step 1: Open Terminal
 
@@ -68,7 +70,7 @@ brew --version
 
 ## Step 3: Install Git, Java, And Gradle
 
-Run this Homebrew install command:
+On a recent Mac, run this Homebrew install command:
 
 ```bash
 brew install git openjdk gradle
@@ -79,6 +81,26 @@ This installs:
 - `git`, used to download Deskmine from GitHub.
 - `openjdk`, which provides Java.
 - `gradle`, which builds the Deskmine plugin.
+
+If that command works, continue below to check the tools.
+
+If Homebrew says it needs full Xcode to install Java, use this split approach instead:
+
+```bash
+brew install git gradle
+```
+
+Then install Java 25 or newer from a normal `.pkg` JDK installer instead of Homebrew. Good places to look are:
+
+- Eclipse Temurin from Adoptium.
+- Azul Zulu.
+
+Choose a macOS JDK package for your Mac type:
+
+- Apple Silicon means newer M1, M2, M3, or M4 Macs.
+- Intel means older non-Apple-Silicon Macs.
+
+After installing the JDK package, close Terminal and open it again.
 
 When it finishes, check the tools:
 
@@ -92,15 +114,17 @@ For Java, Deskmine needs version 25 or newer.
 
 If `java -version` shows an older version, one of two things can happen:
 
-- If Deskmine can find Homebrew's newer Java anyway, it prints `Using Java: ...` and continues.
+- If Deskmine can find a newer installed Java anyway, it prints `Using Java: ...` and continues.
 - If Deskmine cannot find Java 25 or newer, it stops before starting the server and prints `Paper 26.1.2 requires Java 25+`.
 
-If that happens, install or upgrade Java:
+If that happens on a recent macOS version, install or upgrade Java:
 
 ```bash
 brew install openjdk
 brew upgrade openjdk
 ```
+
+If that happens on an older macOS version and Homebrew asks for full Xcode, install Java from a `.pkg` JDK installer instead.
 
 Then try again:
 
@@ -108,7 +132,13 @@ Then try again:
 ./start.command
 ```
 
-The start script uses the Java 25 installation it finds for both the Minecraft server and the Gradle plugin build.
+The start script looks for Java 25 using macOS's normal Java registry, Homebrew paths, and your default `java`. It uses the Java 25 installation it finds for both the Minecraft server and the Gradle plugin build.
+
+If no Java 25 JDK installer supports your macOS version, that Mac cannot run this Deskmine/Paper version locally. At that point the practical choices are:
+
+- Update macOS, if the Mac supports it.
+- Run the Deskmine server on a newer Mac and join it from the older Mac over LAN.
+- Use a future Deskmine build that targets an older Minecraft/Paper/Java combination, if one exists.
 
 ## Step 4: Choose Where To Put Deskmine
 
@@ -366,13 +396,17 @@ brew install openjdk
 brew upgrade openjdk
 ```
 
+If Homebrew says it needs full Xcode to install Java, stop using Homebrew for Java on that Mac. Install a Java 25 or newer JDK from a `.pkg` installer, such as Eclipse Temurin from Adoptium or Azul Zulu, then close Terminal, open it again, and retry.
+
 Then try again:
 
 ```bash
 ./start.command
 ```
 
-If `java -version` still shows an older Java afterward, that can be okay as long as `./start.command` prints `Using Java:` with a Java 25 or newer Homebrew path. If it still stops with the Java 25 warning, follow the extra Homebrew instructions printed after installing `openjdk`, then close Terminal, open it again, and retry.
+If `java -version` still shows an older Java afterward, that can be okay as long as `./start.command` prints `Using Java:` with a Java 25 or newer path. If it still stops with the Java 25 warning, the installed JDK is either too old, not registered with macOS, or not supported on that macOS version.
+
+If no Java 25 installer supports that Mac, run the Deskmine server on a newer Mac instead and connect to it from the older Mac over LAN.
 
 ### Terminal says Gradle is missing
 

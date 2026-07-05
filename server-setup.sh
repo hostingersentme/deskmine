@@ -16,7 +16,7 @@ PLUGIN_PROJECT="$DIR/deskmine-plugin"
 JAVA_BIN=""
 for candidate in java /opt/homebrew/opt/openjdk/bin/java /usr/local/opt/openjdk/bin/java; do
   if "$candidate" -version 2>&1 | head -1 | grep -Eq '"(2[5-9]|[3-9][0-9])'; then
-    JAVA_BIN="$candidate"
+    JAVA_BIN="$(command -v "$candidate" 2>/dev/null || printf '%s' "$candidate")"
     break
   fi
 done
@@ -26,6 +26,9 @@ if [ -z "$JAVA_BIN" ]; then
   exit 1
 fi
 echo "Using Java: $JAVA_BIN"
+JAVA_HOME="$("$JAVA_BIN" -XshowSettings:properties -version 2>&1 | sed -n 's/^ *java.home = //p' | head -1)"
+export JAVA_HOME
+export PATH="$JAVA_HOME/bin:$PATH"
 
 mkdir -p "$SERVER/plugins"
 

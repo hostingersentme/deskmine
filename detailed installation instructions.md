@@ -88,7 +88,27 @@ java -version
 gradle --version
 ```
 
-For Java, Deskmine needs version 25 or newer. If `java -version` shows an older version, do not panic. The Deskmine start script also checks the common Homebrew Java locations directly.
+For Java, Deskmine needs version 25 or newer.
+
+If `java -version` shows an older version, one of two things can happen:
+
+- If Deskmine can find Homebrew's newer Java anyway, it prints `Using Java: ...` and continues.
+- If Deskmine cannot find Java 25 or newer, it stops before starting the server and prints `Paper 26.1.2 requires Java 25+`.
+
+If that happens, install or upgrade Java:
+
+```bash
+brew install openjdk
+brew upgrade openjdk
+```
+
+Then try again:
+
+```bash
+./start.command
+```
+
+The start script uses the Java 25 installation it finds for both the Minecraft server and the Gradle plugin build.
 
 ## Step 4: Choose Where To Put Deskmine
 
@@ -339,18 +359,20 @@ brew install git
 
 ### Terminal says Java is too old
 
-Install or update OpenJDK:
+This means Deskmine could not find Java 25 or newer. Install or update OpenJDK:
 
 ```bash
 brew install openjdk
 brew upgrade openjdk
 ```
 
-Then try:
+Then try again:
 
 ```bash
 ./start.command
 ```
+
+If `java -version` still shows an older Java afterward, that can be okay as long as `./start.command` prints `Using Java:` with a Java 25 or newer Homebrew path. If it still stops with the Java 25 warning, follow the extra Homebrew instructions printed after installing `openjdk`, then close Terminal, open it again, and retry.
 
 ### Terminal says Gradle is missing
 

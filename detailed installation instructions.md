@@ -178,6 +178,20 @@ Run:
 ./start.command
 ```
 
+If Terminal says `permission denied`, or Finder says you do not have permission to open `start.command`, the file lost its permission to run as a program. This can happen if you manually downloaded or replaced the file.
+
+Run this once from inside the `deskmine` folder:
+
+```bash
+chmod +x start.command server-setup.sh stop.command reset-world.command lan-on.command lan-off.command deskmine-plugin/gradlew
+```
+
+Then run:
+
+```bash
+./start.command
+```
+
 The first start does several things:
 
 - Creates a local `server` folder.
@@ -428,6 +442,22 @@ If that file exists, `./start.command` can build the plugin without a system Gra
 ### Minecraft cannot connect to `localhost`
 
 Check that the server is still running in Terminal. Wait until the server finishes starting, then try again.
+
+### Finder says you do not have permission to open `start.command`
+
+The file is not marked as executable. This can happen if you manually downloaded or replaced it instead of using `git clone` or `git pull`.
+
+Open Terminal, go to the Deskmine folder, and run:
+
+```bash
+chmod +x start.command server-setup.sh stop.command reset-world.command lan-on.command lan-off.command deskmine-plugin/gradlew
+```
+
+Then try again:
+
+```bash
+./start.command
+```
 
 ### Menu chests do not work
 

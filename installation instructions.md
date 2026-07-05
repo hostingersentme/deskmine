@@ -35,6 +35,14 @@ Run the launcher:
 ./start.command
 ```
 
+If Terminal says permission is denied, or Finder says you do not have permission to open `start.command`, run this once:
+
+```bash
+chmod +x start.command server-setup.sh stop.command reset-world.command lan-on.command lan-off.command deskmine-plugin/gradlew
+```
+
+Then run `./start.command` again.
+
 The first launch may take a while. The script downloads Paper if needed, downloads Gradle through the included wrapper if needed, builds the Deskmine plugin, installs it into the local `server/plugins` folder, and asks you to accept the Minecraft server EULA.
 
 When the server is ready, open Minecraft Java Edition and join:
@@ -117,6 +125,7 @@ To return to local-only mode:
 
 - If the server says Java is too old, install Java 25 or newer and make sure your terminal finds that version first.
 - If Gradle appears to be missing, update your checkout from GitHub. Deskmine includes `deskmine-plugin/gradlew`, so a separate Gradle install should not be needed.
+- If Finder says you do not have permission to open `start.command`, run `chmod +x start.command server-setup.sh stop.command reset-world.command lan-on.command lan-off.command deskmine-plugin/gradlew` from the Deskmine folder.
 - If the menu chests show an Accessibility warning, grant Accessibility permission and restart the server.
 - If the world does not look like a new high-ground mansion, stop the server, run `./reset-world.command`, and start again.
 - If Minecraft cannot connect, confirm the server console says it is listening and join `localhost`.

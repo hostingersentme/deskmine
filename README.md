@@ -16,6 +16,10 @@ Java 25+ and a Minecraft Java Edition client matching the server version (26.1.x
 
     ./start.command
 
+If macOS says you do not have permission to open it, run:
+
+    chmod +x start.command server-setup.sh stop.command reset-world.command lan-on.command lan-off.command deskmine-plugin/gradlew
+
 Join `localhost`. You spawn in the mansion's entrance hall — your Desktop. The first start takes longer: terrain generates and the mansion gets sited on the highest dry ground near the origin (persisted in `plugins/Deskmine/mansion.tsv`). The old void world folder (`server/deskmine`) is unused and can be deleted.
 
 Commands: `/dm spawn`, `/dm goto <path>`, `/dm up`, `/dm whereami`, `/dm refresh`.

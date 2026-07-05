@@ -2,12 +2,18 @@
 server/
 
 # Build outputs and caches.
+node_modules/
+dist/
 deskmine-plugin/build/
 deskmine-plugin/.gradle/
 build/
 .gradle/
 *.class
 *.jar
+
+# Environment files.
+.env
+.env.*
 
 # Logs and crash reports.
 *.log

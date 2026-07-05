@@ -10,6 +10,7 @@ build/
 .gradle/
 *.class
 *.jar
+!deskmine-plugin/gradle/wrapper/gradle-wrapper.jar
 
 # Environment files.
 .env

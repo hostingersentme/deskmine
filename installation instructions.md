@@ -7,16 +7,16 @@ This guide installs Deskmine from the public GitHub repository and starts a loca
 - macOS.
 - Minecraft Java Edition client matching the server version used by this project, currently 26.1.x.
 - Java 25 or newer.
-- Gradle.
+- Git, so you can download the project.
 - Accessibility permission for the terminal app that starts the server if you want menu-bar chests and real menu clicks to work.
 
 Homebrew install examples:
 
 ```bash
-brew install openjdk gradle
+brew install git
 ```
 
-After installing Java with Homebrew, follow any `brew` caveat output so `java` is available in your terminal.
+Install Java 25 or newer from Homebrew or from a normal macOS JDK package. Gradle does not need to be installed separately; Deskmine includes a Gradle wrapper that downloads the right Gradle version on first build.
 
 ## Download Deskmine
 
@@ -35,7 +35,7 @@ Run the launcher:
 ./start.command
 ```
 
-The first launch may take a while. The script downloads Paper if needed, builds the Deskmine plugin, installs it into the local `server/plugins` folder, and asks you to accept the Minecraft server EULA.
+The first launch may take a while. The script downloads Paper if needed, downloads Gradle through the included wrapper if needed, builds the Deskmine plugin, installs it into the local `server/plugins` folder, and asks you to accept the Minecraft server EULA.
 
 When the server is ready, open Minecraft Java Edition and join:
 
@@ -116,7 +116,7 @@ To return to local-only mode:
 ## Troubleshooting
 
 - If the server says Java is too old, install Java 25 or newer and make sure your terminal finds that version first.
-- If `gradle` is missing, install it with Homebrew or your preferred package manager.
+- If Gradle appears to be missing, update your checkout from GitHub. Deskmine includes `deskmine-plugin/gradlew`, so a separate Gradle install should not be needed.
 - If the menu chests show an Accessibility warning, grant Accessibility permission and restart the server.
 - If the world does not look like a new high-ground mansion, stop the server, run `./reset-world.command`, and start again.
 - If Minecraft cannot connect, confirm the server console says it is listening and join `localhost`.

@@ -4,13 +4,13 @@ Implementation of `MinecraftDesktopWorld_Spec.md`, evolved: your Mac's filesyste
 
 ## What's here
 
-    deskmine-plugin/   Paper plugin (Gradle, Java 25, targets Paper 26.1.2)
+    deskmine-plugin/   Paper plugin (Gradle wrapper included, Java 25, targets Paper 26.1.2)
     server-setup.sh    Downloads Paper, builds + installs the plugin, runs the server
     start.command      Double-click to start; stop.command to stop
 
 ## Requirements
 
-Java 25+ and Gradle, and a Minecraft Java Edition client matching the server version (26.1.x). The menu bar needs Accessibility permission for the process running the server (System Settings → Privacy & Security → Accessibility → your terminal).
+Java 25+ and a Minecraft Java Edition client matching the server version (26.1.x). Gradle does not need to be installed separately; the plugin includes a Gradle wrapper. The menu bar needs Accessibility permission for the process running the server (System Settings → Privacy & Security → Accessibility → your terminal).
 
 ## Quick start
 

@@ -84,7 +84,8 @@ if [ -f "$PLUGIN_PROJECT/gradlew" ]; then
 elif command -v gradle >/dev/null 2>&1; then
   (cd "$PLUGIN_PROJECT" && gradle -q build)
 else
-  echo "Gradle not found. Install with:  brew install gradle"
+  echo "Gradle wrapper missing and system Gradle not found."
+  echo "Re-download Deskmine from GitHub, or install Gradle manually as a fallback."
   exit 1
 fi
 find "$SERVER/plugins" -maxdepth 1 -type f -name 'deskmine-*.jar' -delete

@@ -1,6 +1,6 @@
 # Detailed Installation Instructions
 
-This is the beginner-friendly version. It assumes you have never used GitHub, Homebrew, Terminal, Java, Gradle, or a local Minecraft server before.
+This is the beginner-friendly version. It assumes you have never used GitHub, Homebrew, Terminal, Java, or a local Minecraft server before.
 
 By the end, you should be able to open Minecraft Java Edition, join `localhost`, and spawn inside Deskmine: a Minecraft world where your well-known Mac home folders form a mansion on high ground.
 
@@ -26,10 +26,9 @@ You need:
 - A Minecraft client version matching the Deskmine server version, currently 26.1.x.
 - Homebrew, which is a common Mac installer for developer tools.
 - Java 25 or newer.
-- Gradle, which builds the Deskmine plugin.
 - Git, which downloads the Deskmine source from GitHub.
 
-The good news: on recent macOS versions, Homebrew can install Git, Java, and Gradle with one command.
+Deskmine includes its own Gradle wrapper, so you do not need to install Gradle with Homebrew. This helps on older Macs where `brew install gradle` may stop part-way through.
 
 Older macOS warning: Homebrew may say it needs a full Xcode installation to install Java. That usually means Homebrew cannot use a ready-made Java download for your macOS version and wants to build Java itself. That is not beginner-friendly, and full Xcode may not be available for old macOS versions. If that happens, do not try to build Java with Xcode. Use the older-Mac Java notes in Step 3.
 
@@ -68,29 +67,25 @@ After installing, close Terminal, open Terminal again, and check:
 brew --version
 ```
 
-## Step 3: Install Git, Java, And Gradle
+## Step 3: Install Git And Java
 
-On a recent Mac, run this Homebrew install command:
-
-```bash
-brew install git openjdk gradle
-```
-
-This installs:
-
-- `git`, used to download Deskmine from GitHub.
-- `openjdk`, which provides Java.
-- `gradle`, which builds the Deskmine plugin.
-
-If that command works, continue below to check the tools.
-
-If Homebrew says it needs full Xcode to install Java, use this split approach instead:
+Install Git with Homebrew:
 
 ```bash
-brew install git gradle
+brew install git
 ```
 
-Then install Java 25 or newer from a normal `.pkg` JDK installer instead of Homebrew. Good places to look are:
+Git downloads Deskmine from GitHub.
+
+Now install Java 25 or newer.
+
+On a recent Mac, Homebrew may work:
+
+```bash
+brew install openjdk
+```
+
+On Monterey or another older macOS version, Homebrew may say it needs full Xcode to install Java. If that happens, stop using Homebrew for Java and install Java 25 or newer from a normal `.pkg` JDK installer instead. Good places to look are:
 
 - Eclipse Temurin from Adoptium.
 - Azul Zulu.
@@ -102,12 +97,19 @@ Choose a macOS JDK package for your Mac type:
 
 After installing the JDK package, close Terminal and open it again.
 
-When it finishes, check the tools:
+You do not need this command anymore:
+
+```bash
+brew install gradle
+```
+
+Deskmine includes `deskmine-plugin/gradlew`, which downloads and runs the needed Gradle version by itself.
+
+When Java and Git are installed, check:
 
 ```bash
 git --version
 java -version
-gradle --version
 ```
 
 For Java, Deskmine needs version 25 or newer.
@@ -132,7 +134,7 @@ Then try again:
 ./start.command
 ```
 
-The start script looks for Java 25 using macOS's normal Java registry, Homebrew paths, and your default `java`. It uses the Java 25 installation it finds for both the Minecraft server and the Gradle plugin build.
+The start script looks for Java 25 using macOS's normal Java registry, Homebrew paths, and your default `java`. It uses the Java 25 installation it finds for both the Minecraft server and the Gradle wrapper build.
 
 If no Java 25 JDK installer supports your macOS version, that Mac cannot run this Deskmine/Paper version locally. At that point the practical choices are:
 
@@ -180,6 +182,7 @@ The first start does several things:
 
 - Creates a local `server` folder.
 - Downloads the Paper Minecraft server.
+- Downloads Gradle through the included Gradle wrapper, if needed.
 - Builds the Deskmine plugin.
 - Copies the plugin into the server.
 - Asks whether you accept the Minecraft server EULA.
@@ -408,13 +411,19 @@ If `java -version` still shows an older Java afterward, that can be okay as long
 
 If no Java 25 installer supports that Mac, run the Deskmine server on a newer Mac instead and connect to it from the older Mac over LAN.
 
-### Terminal says Gradle is missing
+### Homebrew stops while installing Gradle
 
-Install Gradle:
+You do not need Homebrew Gradle anymore. Deskmine includes the Gradle wrapper.
 
-```bash
-brew install gradle
+If `brew install gradle` is stuck or fails on Monterey, stop that Homebrew install and continue without it.
+
+The important file is:
+
+```text
+deskmine-plugin/gradlew
 ```
+
+If that file exists, `./start.command` can build the plugin without a system Gradle install.
 
 ### Minecraft cannot connect to `localhost`
 

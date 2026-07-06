@@ -45,7 +45,13 @@ Then run `./start.command` again.
 
 The first launch may take a while. The script downloads Paper if needed, downloads Gradle through the included wrapper if needed, builds the Deskmine plugin, installs it into the local `server/plugins` folder, and asks you to accept the Minecraft server EULA.
 
-When the server is ready, open Minecraft Java Edition and join:
+When the server is ready, open Minecraft Java Edition. The server may not appear automatically in the multiplayer server list; that is okay. Use:
+
+```text
+Multiplayer > Direct Connection
+```
+
+Then enter:
 
 ```text
 localhost
@@ -128,4 +134,5 @@ To return to local-only mode:
 - If Finder says you do not have permission to open `start.command`, run `chmod +x start.command server-setup.sh stop.command reset-world.command lan-on.command lan-off.command deskmine-plugin/gradlew` from the Deskmine folder.
 - If the menu chests show an Accessibility warning, grant Accessibility permission and restart the server.
 - If the world does not look like a new high-ground mansion, stop the server, run `./reset-world.command`, and start again.
-- If Minecraft cannot connect, confirm the server console says it is listening and join `localhost`.
+- If the server does not appear in the Minecraft server list, use Multiplayer > Direct Connection and enter `localhost`.
+- If Minecraft cannot connect, confirm the server console says it is listening and try Direct Connection to `localhost` or `127.0.0.1`.

@@ -221,14 +221,15 @@ Use a client version matching the server version, currently 26.1.x.
 Then:
 
 1. Click Multiplayer.
-2. Click Direct Connection.
-3. Enter:
+2. Do not worry if Deskmine does not appear automatically in the server list.
+3. Click Direct Connection.
+4. Enter:
 
 ```text
 localhost
 ```
 
-4. Click Join Server.
+5. Click Join Server.
 
 You should spawn in the Desktop room, which is the entrance hall of the mansion.
 
@@ -441,7 +442,21 @@ If that file exists, `./start.command` can build the plugin without a system Gra
 
 ### Minecraft cannot connect to `localhost`
 
-Check that the server is still running in Terminal. Wait until the server finishes starting, then try again.
+First, make sure you are using Multiplayer > Direct Connection. Deskmine may not appear automatically in Minecraft's server list.
+
+Enter:
+
+```text
+localhost
+```
+
+If that does not work, try:
+
+```text
+127.0.0.1
+```
+
+Also check that the server is still running in Terminal. Wait until the server finishes starting, then try again.
 
 ### Finder says you do not have permission to open `start.command`
 
